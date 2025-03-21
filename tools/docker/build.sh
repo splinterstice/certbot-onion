@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -euxo pipefail
 
 # This script builds docker images for certbot and each dns plugin from the
@@ -32,7 +32,7 @@ BuildAndLoadByArch() {
     docker buildx build --target certbot --builder certbot_builder \
         --platform "$(arch2platform "$TAG_ARCH")" \
         -f "${WORK_DIR}/Dockerfile" \
-        -t "${DOCKER_HUB_ORG}/certbot:${TAG_ARCH}-${TAG_VER}" \
+        -t "${DOCKER_HUB_ORG}/certbot-onion:${TAG_ARCH}-${TAG_VER}" \
         --load \
         .
     for plugin in "${CERTBOT_PLUGINS[@]}"; do

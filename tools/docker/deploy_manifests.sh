@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -euxo pipefail
 
 # This script generates multi-arch manifests for images previously pushed to
@@ -42,7 +42,7 @@ DeployManifest() {
     fi
 }
 
-DeployManifest certbot
+DeployManifest certbot-onion
 for PLUGIN in "${CERTBOT_PLUGINS[@]}"; do
     DeployManifest "$PLUGIN"
 done

@@ -9,23 +9,11 @@ export ALL_TARGET_ARCH=(amd64 arm32v6 arm64v8)
 # using a different account on Docker Hub, you can change this value to have
 # the scripts modify those Docker repositories rather than the repositories for
 # the official Certbot Docker images.
-export DOCKER_HUB_ORG="certbot"
+export DOCKER_HUB_ORG="splinterstice"
 
 # List of Certbot plugins
 export CERTBOT_PLUGINS=(
-    "dns-dnsmadeeasy"
-    "dns-dnsimple"
-    "dns-ovh"
-    "dns-cloudflare"
-    "dns-digitalocean"
-    "dns-google"
-    "dns-luadns"
-    "dns-nsone"
-    "dns-rfc2136"
-    "dns-route53"
-    "dns-gehirn"
-    "dns-linode"
-    "dns-sakuracloud"
+    "onion"
 )
 
 # WORK_DIR is two levels above this file

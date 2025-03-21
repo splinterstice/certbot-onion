@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -euxo pipefail
 
 # This script takes docker images in the local docker cache and pushes them to
@@ -39,7 +39,7 @@ DeployImage() {
 
 
 for TAG_ARCH in "${REQUESTED_ARCH_ARRAY[@]}"; do
-    DeployImage certbot "$TAG_ARCH"
+    DeployImage certbot-onion "$TAG_ARCH"
     for PLUGIN in "${CERTBOT_PLUGINS[@]}"; do
         DeployImage "$PLUGIN" "$TAG_ARCH"
     done

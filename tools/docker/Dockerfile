@@ -1,5 +1,5 @@
 #base image
-FROM python:3.12-alpine3.20 AS certbot
+FROM python:3.12-alpine3.21 AS certbot
 
 ENTRYPOINT [ "certbot" ]
 EXPOSE 80 443
@@ -34,7 +34,6 @@ ARG CARGO_NET_GIT_FETCH_WITH_CLI=true
 RUN apk add --no-cache --virtual .build-deps \
         gcc \
         linux-headers \
-        openssl-dev \
         musl-dev \
         libffi-dev \
         python3-dev \
@@ -53,4 +52,19 @@ RUN apk add --no-cache --virtual .build-deps \
 #extensive use of the cache.
 FROM certbot AS certbot-plugin
 COPY --from=plugin-src . /opt/certbot/src/plugin
-RUN python tools/pip_install.py --no-cache-dir --editable /opt/certbot/src/plugin
+RUN apk add --no-cache --virtual .build-deps \
+        gcc \
+        linux-headers \
+        musl-dev \
+        libffi-dev \
+        python3-dev \
+        cargo \
+        git \
+        pkgconfig \
+        openssl-dev \
+        make \
+        perl \
+        rustup \
+    && python tools/pip_install.py --no-cache-dir --editable /opt/certbot/src/plugin \
+    && apk del .build-deps
+
