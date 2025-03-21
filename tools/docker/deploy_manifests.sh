@@ -33,7 +33,7 @@ DeployManifest() {
     
     SRC_IMAGES=""
     for TAG_ARCH in "${REQUESTED_ARCH_ARRAY[@]}"; do
-        SRC_IMAGES+="${REGISTRY_SPEC}${IMAGE_NAME}:${TAG_ARCH}-${TAG_VER} "
+        SRC_IMAGES+="${REGISTRY_SPEC}${IMAGE_NAME}:${TAG_ARCH}-${TAG_VER}"
     done
     docker buildx imagetools create -t "${REGISTRY_SPEC}${IMAGE_NAME}:${TAG_VER}" $SRC_IMAGES
 
