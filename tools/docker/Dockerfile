@@ -11,6 +11,7 @@ COPY CHANGELOG.md README.rst src/
 COPY tools tools
 COPY acme src/acme
 COPY certbot src/certbot
+COPY certbot-onion src/plugin
 
 # Install certbot runtime dependencies
 RUN apk add --no-cache --virtual .certbot-deps \
@@ -40,10 +41,15 @@ RUN apk add --no-cache --virtual .build-deps \
         cargo \
         git \
         pkgconfig \
+        openssl-dev \
+        make \
+        perl \
+        rustup \
     && CARGO_LOG=trace CARGO_TERM_VERBOSE=true python tools/pip_install.py \
             --no-cache-dir -vvv \
             --editable src/acme \
             --editable src/certbot \
+            --editable src/plugin \
     && apk del .build-deps \
     && rm -rf ${HOME}/.cargo
 

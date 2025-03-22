@@ -29,14 +29,14 @@ InstallMultiarchSupport
 
 BuildAndLoadByArch() {
     TAG_ARCH=$1
-    docker buildx build --target certbot --builder certbot_builder \
+    docker buildx build --no-cache --target certbot --builder certbot_builder \
         --platform "$(arch2platform "$TAG_ARCH")" \
         -f "${WORK_DIR}/Dockerfile" \
         -t "${DOCKER_HUB_ORG}/certbot-onion:${TAG_ARCH}-${TAG_VER}" \
         --load \
         .
     for plugin in "${CERTBOT_PLUGINS[@]}"; do
-        docker buildx build --target certbot-plugin --builder certbot_builder \
+        docker buildx build --no-cache --target certbot-plugin --builder certbot_builder \
             --platform "$(arch2platform "$TAG_ARCH")" \
             --build-context plugin-src="${REPO_ROOT}/certbot-${plugin}" \
             -f "${WORK_DIR}/Dockerfile" \

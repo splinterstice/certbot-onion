@@ -36,7 +36,7 @@ TestImage() {
 
 
 for TAG_ARCH in "${REQUESTED_ARCH_ARRAY[@]}"; do
-    TestImage certbot "$TAG_ARCH" "$TAG_VER"
+    TestImage certbot-onion "$TAG_ARCH" "$TAG_VER"
     for PLUGIN in "${CERTBOT_PLUGINS[@]}"; do
         TestImage "$PLUGIN" "$TAG_ARCH" "$TAG_VER"
     done
